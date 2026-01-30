@@ -118,6 +118,7 @@ local function rebind_bracket(keymap, bracket_char, dir)
 	}
 	opts.callback = wrap_rhs(keymap.mode, keymap.rhs, keymap.callback, bracket_char, dir)
 
+	-- print('1 rebinding ' .. keymap.lhs)
 	if keymap.buffer ~= 0 then
 		api.nvim_buf_set_keymap(keymap.buffer, keymap.mode, keymap.lhs, '', opts)
 	else
@@ -130,6 +131,7 @@ end
 local function set_keymap_override(mode, lhs, rhs, opts)
 	local bracket_char, dir = get_bracket_char(lhs)
 	if bracket_char then
+		-- print('2 rebinding ' .. lhs)
 		opts.callback = wrap_rhs(mode, rhs, opts.callback, bracket_char, dir)
 		binds_map[dir][bracket_char] = opts.callback
 
@@ -142,6 +144,7 @@ end
 local function set_keymap_buf_override(buffer, mode, lhs, rhs, opts)
 	local bracket_char, dir = get_bracket_char(lhs)
 	if bracket_char then
+		-- print('3 rebinding ' .. lhs)
 		opts.callback = wrap_rhs(mode, rhs, opts.callback, bracket_char, dir)
 		binds_map[dir][bracket_char] = opts.callback
 
