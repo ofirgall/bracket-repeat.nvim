@@ -79,7 +79,7 @@ local function wrap_rhs(mode, rhs, callback, bracket_char, dir)
 			end,
 		})
 
-		orig_cb()
+		return orig_cb()
 	end
 end
 
