@@ -36,6 +36,11 @@ end
 -- Bind ']' and '[' to repeat until cursor moved
 local function bind_bracket_repeat(bufnr, expr)
 	if not is_bracket_binds_overridden[bufnr] then
+		-- Fix inconsistency of expr usages. to fix replace_keycodes behavior
+		if expr == 0 then
+			expr = false
+		end
+
 		vim.keymap.set('n', ';', function()
 			return repeat_last(']')
 		end, { nowait = true, buffer = bufnr, expr = expr })
